@@ -3,7 +3,7 @@ MAINTAINER Kengo Suzuki
 
 # Make Packages Latest
 RUN set -ex && \
-    apt-get update
+    apt-get update  && \
     apt-get -y upgrade
 
 # Install Required Packages
