@@ -18,11 +18,6 @@ WORKDIR /home/ml
 ENV HOME /home/ml
 
 # Install Pyenv
-#RUN set -ex && \
-#    git clone https://github.com/yyuu/pyenv.git ~/.pyenv && \
-#    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc && \
-#    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc && \
-#    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 RUN git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 ENV PYENV_ROOT $HOME/.pyenv
 ENV PATH $PYENV_ROOT/bin:$PATH
