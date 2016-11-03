@@ -16,21 +16,30 @@ RUN set -ex && \
     apt-get install -y bzip2  && \
     apt-get install -y git
 
-# Install Pyenv
-RUN set -ex && \
-    git clone https://github.com/yyuu/pyenv.git ~/.pyenv && \
-    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc && \
-    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc && \
-    echo 'eval "$(pyenv init -)"' >> ~/.bashrc 
+# Create user
+RUN adduser ml
+USER ml
+WORKDIR /home/ml
+ENV HOME /home/ml
 
-RUN /bin/bash -c "source ~/.bashrc"
+# Install Pyenv
+#RUN set -ex && \
+#    git clone https://github.com/yyuu/pyenv.git ~/.pyenv && \
+#    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc && \
+#    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc && \
+#    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+RUN git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/bin:$PATH
+RUN set -ex && \
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc && \
+    /bin/bash -c 'source ~/.bashrc'
 
 # Install Anaconda (Jupyter Notebook will be installed as well)
-#RUN set -ex && \
-#    pyenv install anaconda3-4.1.1 # Latest Anaconda && \
-#    echo 'export PATH="$PYENV_ROOT/versions/anaconda3-4.1.1/bin/:$PATH"' >> ~/.bashrc && \
-#    conda update conda # Just Making sure to update conda -y
-#
+RUN set -ex && pyenv install anaconda3-4.1.1
+ENV PATH $PYENV_ROOT/versions/anaconda3-4.1.1/bin/:$PATH
+RUN set -ex && conda update conda
+
 ## Making Workind Dir
 #RUN mkdir workspace
 #
