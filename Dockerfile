@@ -15,21 +15,21 @@ RUN set -ex && apt-get update && apt-get install -y \
 #RUN adduser ml
 #USER ml
 #WORKDIR /home/ml
-ENV HOME /root/
+ENV HOME /root
 
 # Install Pyenv
-RUN git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+RUN git clone https://github.com/yyuu/pyenv.git $HOME/.pyenv
 ENV PYENV_ROOT $HOME/.pyenv
 ENV PATH $PYENV_ROOT/bin:$PATH
 RUN set -ex && \
-    echo 'eval "$(pyenv init -)"' >> ~/.bashrc && \
-    /bin/bash -c 'source ~/.bashrc'
+    echo 'eval "$(pyenv init -)"' >> $HOME/.bashrc && \
+    /bin/bash -c 'source $HOME/.bashrc'
 
 # Install Anaconda (Jupyter Notebook will be installed as well)
 #RUN set -ex && pyenv install anaconda3-4.1.1
 RUN set -ex && \
-    wget --quiet https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh -O ~/anaconda.sh && \
-    /bin/bash ~/anaconda.sh -b -p $PYENV_ROOT/versions/anaconda3-4.1.1 && \
+    wget --quiet https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh -O $HOME/anaconda.sh && \
+    /bin/bash $HOME/anaconda.sh -b -p $PYENV_ROOT/versions/anaconda3-4.1.1 && \
     rm ~/anaconda.sh 
 
 ENV PATH $PYENV_ROOT/versions/anaconda3-4.1.1/bin/:$PATH
