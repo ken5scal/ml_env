@@ -11,10 +11,6 @@ RUN set -ex && apt-get update && apt-get install -y \
     bzip2 \
     git
 
-# Create user
-#RUN adduser ml
-#USER ml
-#WORKDIR /home/ml
 ENV HOME /root
 
 # Install Pyenv
@@ -35,8 +31,6 @@ RUN set -ex && \
 ENV PATH $PYENV_ROOT/versions/anaconda3-4.1.1/bin/:$PATH
 RUN set -ex && conda update conda
 
-## Making Workind Dir
-RUN mkdir workspace
 
 # Run Jupyter Notebook on port 8888
 # Add Tini. Tini operates as a process subreaper for jupyter. Prevents Kernel Crash
@@ -46,5 +40,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 RUN chmod +x /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
+RUN mkdir $HOME/workspace
+WORKDIR /$HOME/workspace
 EXPOSE 8888
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
