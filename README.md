@@ -1,11 +1,13 @@
 
-# Casual Updates
+# So Way You Set Up Usually)
+
+## Casual Updates
 ```
 apt-get update
 apt-get -y upgrade
 ```
 
-# Dependencies
+## Dependencies
 ```
 apt-get install -y man
 apt-get install -y vim
@@ -15,14 +17,14 @@ apt-get install -y wget
 apt-get install -y bzip2
 ```
 
-# Git Installtion
+## Git Installtion
 ```
 apt-get -y install git
 git config --global user.name "Kengo Suzuki"
 git config --global user.email "kengoscal@gmail.com"
 ```
 
-# Pyenv install
+## Pyenv install
 ```
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
@@ -31,20 +33,20 @@ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-# Anaconda Install(Jupyterもインスコされる)
+## Anaconda Install(Jupyterもインスコされる)
 ```
 pyenv install anaconda3-4.1.1 # Latest Anaconda
 echo 'export PATH="$PYENV_ROOT/versions/anaconda3-4.1.1/bin/:$PATH"' >> ~/.bashrc
 conda update conda # Just Making sure to update conda -y
 ```
 
-# Workding Dir
+## Workding Dir
 ```
 mkdir workspace
 cd workspace
 ```
 
-# Run Jupyter Notebook
+## Run Jupyter Notebook
 ```
 jupyter notebook --port=8888 --no-browser --ip=0.0.0.0
 ```
