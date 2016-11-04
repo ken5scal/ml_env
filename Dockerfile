@@ -12,10 +12,10 @@ RUN set -ex && apt-get update && apt-get install -y \
     git
 
 # Create user
-RUN adduser ml
-USER ml
-WORKDIR /home/ml
-ENV HOME /home/ml
+#RUN adduser ml
+#USER ml
+#WORKDIR /home/ml
+ENV HOME /root/
 
 # Install Pyenv
 RUN git clone https://github.com/yyuu/pyenv.git ~/.pyenv
@@ -43,7 +43,7 @@ RUN mkdir workspace
 # http://jupyter-notebook.readthedocs.io/en/latest/public_server.html
 ENV TINI_VERSION v0.6.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
-RUN chmod +x /usr/bin/tini
+RUN sudo chmod +x /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 EXPOSE 8888
